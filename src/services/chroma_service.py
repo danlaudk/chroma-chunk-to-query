@@ -6,16 +6,19 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict
 
-from ..config.settings import (
-    CHROMA_PERSISTENCE_DIR,
-    EMBEDDING_MODEL_NAME
-)
+from ..config.settings import config
 
 class ChromaService:
-    def __init__(self):
-        """Initialize ChromaDB client and embedding model."""
-        self.client = chromadb.PersistentClient(path=CHROMA_PERSISTENCE_DIR)
-        self.sentence_transformer = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    def __init__(self, chroma_config=None):
+        """
+        Initialize ChromaDB client and embedding model.
+        
+        Args:
+            chroma_config: Optional ChromaConfig instance for testing
+        """
+        self.config = chroma_config or config.chroma
+        self.client = chromadb.PersistentClient(path=self.config.persistence_dir)
+        self.sentence_transformer = SentenceTransformer(self.config.embedding_model)
         self.collection = self._get_or_create_collection()
 
     def _get_embeddings(self, texts: List[str]) -> List[List[float]]:
@@ -26,11 +29,11 @@ class ChromaService:
         """Get or create the Wikipedia chunks collection."""
         # Create a proper embedding function object
         embedding_function = chromadb.utils.embedding_functions.SentenceTransformerEmbeddingFunction(
-            model_name=EMBEDDING_MODEL_NAME
+            model_name=self.config.embedding_model
         )
         
         return self.client.get_or_create_collection(
-            name="wikipedia_chunks",
+            name=self.config.collection_name,
             embedding_function=embedding_function
         )
 
@@ -48,8 +51,18 @@ class ChromaService:
         )
         print("Chunks indexed successfully.")
 
-    def query_chunks(self, query_text: str, linked_wikipedia_title: str, top_k: int = 5) -> List[Dict]:
-        """Query ChromaDB for semantically similar chunks."""
+    def query_chunks(self, query_text: str, linked_wikipedia_title: str, top_k: int = None) -> List[Dict]:
+        """
+        Query ChromaDB for semantically similar chunks.
+        
+        Args:
+            query_text: The query text to search for
+            linked_wikipedia_title: The Wikipedia article title to filter by
+            top_k: Number of results to return (uses config default if None)
+        """
+        if top_k is None:
+            top_k = config.retrieval.default_chunk_retrieval_count
+            
         print(f"Querying Chroma for relevant chunks for '{query_text}' from '{linked_wikipedia_title}'...")
         
         metadata_filter = {"source_article": linked_wikipedia_title}
