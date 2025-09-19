@@ -28,7 +28,7 @@ class ChromaService:
         embedding_function = chromadb.utils.embedding_functions.SentenceTransformerEmbeddingFunction(
             model_name=EMBEDDING_MODEL_NAME
         )
-        
+        # self.client.delete_collection("wikipedia_chunks")
         return self.client.get_or_create_collection(
             name="wikipedia_chunks",
             embedding_function=embedding_function

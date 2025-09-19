@@ -1,7 +1,7 @@
 """
 Test script to verify Wikipedia service functionality.
 """
-from ..services.wikipedia_service import WikipediaService
+from src.services.wikipedia_service import WikipediaService
 
 def test_wikipedia_service():
     print("Testing Wikipedia Service...")

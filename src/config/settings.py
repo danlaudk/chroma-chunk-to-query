@@ -13,8 +13,9 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 LLM_PROVIDER = "google"  # LiteLLM provider name
 LLM_MODEL = "gemini/gemini-2.0-flash"  # Model name
 LLM_TEMPERATURE = 0.1  # Lower temperature for more focused responses
+LOCAL_LLM_MODEL = "gpt-4o-mini"
 
-# LiteLLM Fallback Configuration
+# Fallback Configuration
 FALLBACK_PROVIDERS = [
     {"provider": "google", "model": "gemini/gemini-2.0-flash"},
     # Add more fallback models here if needed
@@ -26,7 +27,7 @@ FALLBACK_PROVIDERS = [
 CHROMA_PERSISTENCE_DIR = "./chroma_db"
 
 # Embedding Model Settings
-EMBEDDING_MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
+EMBEDDING_MODEL_NAME = "mixedbread-ai/deepset-mxbai-embed-de-large-v1"
 
 # Wikipedia API Settings
 WIKIPEDIA_API_URL = "https://en.wikipedia.org/w/api.php"

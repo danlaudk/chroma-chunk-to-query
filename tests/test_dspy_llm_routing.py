@@ -2,7 +2,7 @@
 Test script to verify DSPy LLM routing behavior and configuration.
 """
 import dspy
-from ..models.llm_model import initialize_litellm_dspy
+from src.models.llm_model import initialize_dspy
 
 def test_dspy_llm_routing():
     """Test how DSPy routes LLM calls in different contexts."""
@@ -10,11 +10,11 @@ def test_dspy_llm_routing():
     
     try:
         # Initialize our custom LLM model
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         print("✓ Custom LLM model initialized")
         
         # Test 1: Direct call to our model
-        print("\nTest 1: Direct call to our LiteLLMModel")
+        print("\nTest 1: Direct call to our LLM")
         response1 = llm("What is 2+2?")
         print(f"Direct response: {response1}")
         
@@ -42,7 +42,7 @@ def test_dspy_configuration_verification():
     
     try:
         # Initialize our custom LLM model
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         print("✓ Custom LLM model initialized")
         
         # Check DSPy's current configuration
@@ -77,7 +77,7 @@ def test_model_name_routing():
     try:
         # Test with our current model name
         print("Current model name test:")
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         
         # Try to create a ChainOfThought with explicit model specification
         print("\nTrying ChainOfThought with explicit model...")

@@ -1,3 +1,13 @@
+# litellm access to one service (without dspy??) ??
+# entity linking service using claude and chatgpt (URL/name) (wikipedia api investigate)
+# update dspy to 3.0.2
+# wide variation LLM to generate retrieval query
+# chromadb test teardown usint unittest
+# chromadb error edge case 
+#    2. Testing empty chunks list...
+#     Indexing 0 chunks in ChromaDB...
+#        ⚠ Empty chunks list caused error: Non-empty lists are required for ['ids', 'metadatas', 'documents'] in add.
+
 # Pseudocode for a Robust Entity Classification and Wikipedia Matching System
 
 # This pseudocode outlines the architecture for classifying named entities

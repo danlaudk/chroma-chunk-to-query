@@ -2,7 +2,7 @@
 Test script to verify sentence-transformers functionality.
 """
 from sentence_transformers import SentenceTransformer
-from ..config.settings import EMBEDDING_MODEL_NAME
+from src.config.settings import EMBEDDING_MODEL_NAME
 
 def test_embeddings():
     print("Testing Sentence Transformers...")

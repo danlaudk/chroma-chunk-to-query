@@ -7,8 +7,9 @@ import dspy
 
 from .wikipedia_service import WikipediaService
 from .chroma_service import ChromaService
+from .daily_activity_service import DailyActivityExtractorService
 from ..models.entity_classifier import ClassifyEntityModule
-from ..models.llm_model import initialize_litellm_dspy
+from ..models.llm_model import initialize_dspy
 
 class EntityProcessor:
     def __init__(self):
@@ -16,9 +17,10 @@ class EntityProcessor:
         self.wikipedia_service = WikipediaService()
         self.chroma_service = ChromaService()
         self.classifier = ClassifyEntityModule()
+        self.daily_activity_service = DailyActivityExtractorService()
         
-        # Configure DSPy with LiteLLM
-        self.llm = initialize_litellm_dspy()
+        # Configure DSPy
+        self.llm = initialize_dspy()
 
     def perform_entity_linking(self, term: str) -> Dict:
         """
@@ -98,3 +100,10 @@ class EntityProcessor:
             "explanation": explanation,
             "matched_chunks": relevant_chunks
         } 
+
+    def extract_daily_activities(self, transcript_path: str) -> str:
+        """
+        Extract daily activities from a transcript via DSPy Predict and write them
+        to a sidecar file next to the transcript. Returns the exact string written.
+        """
+        return self.daily_activity_service.extract_and_save(transcript_path)

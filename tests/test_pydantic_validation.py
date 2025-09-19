@@ -2,12 +2,12 @@
 Demonstration of Pydantic validation features for LLM responses.
 """
 import dspy
-from ..models.entity_classifier import (
+from src.models.entity_classifier import (
     ClassifyEntityModule, 
     EntityType, 
     EntityClassificationResponse
 )
-from ..models.llm_model import initialize_litellm_dspy
+from src.models.llm_model import initialize_dspy
 from pydantic import ValidationError
 
 
@@ -18,7 +18,7 @@ def demo_validation_features():
     print("=" * 60)
     
     # Initialize the classifier
-    llm = initialize_litellm_dspy()
+    llm = initialize_dspy()
     classifier = ClassifyEntityModule()
     
     print("\n1. Testing Valid LLM Response Validation")

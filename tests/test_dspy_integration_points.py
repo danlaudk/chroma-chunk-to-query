@@ -1,9 +1,9 @@
 """
-Test script to verify DSPy integration points for dspy.LM with LiteLLM.
+Test script to verify DSPy integration points for dspy.LM with LiteLLM??.
 """
 import dspy
-from ..models.llm_model import initialize_litellm_dspy
-from ..config.settings import LLM_MODEL, LLM_TEMPERATURE
+from src.models.llm_model import initialize_dspy
+from src.config.settings import LLM_MODEL, LLM_TEMPERATURE
 
 def test_dspy_configure_integration():
     """Test that our dspy.LM can be configured with DSPy."""
@@ -11,10 +11,10 @@ def test_dspy_configure_integration():
     
     try:
         # Test 1: Can we create our LM using the initialization function?
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         print("✓ dspy.LM creation successful")
         
-        # Test 2: DSPy should already be configured by initialize_litellm_dspy()
+        # Test 2: DSPy should already be configured by initialize_dspy()
         print("✓ DSPy configuration successful")
         
         # Test 3: Does our LM have the required interface?
@@ -33,7 +33,7 @@ def test_forward_method_signature():
     print("\nTesting forward method signature...")
     
     try:
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         
         # Test that forward accepts the expected parameters
         import inspect
@@ -58,7 +58,7 @@ def test_dspy_chain_of_thought_integration():
     
     try:
         # Configure DSPy with our model
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         
         # Create a ChainOfThought predictor
         cot = dspy.ChainOfThought("question -> answer")
@@ -81,7 +81,7 @@ def test_dspy_predict_integration():
     
     try:
         # Configure DSPy with our model
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         
         # Create a Predict module
         predictor = dspy.Predict("input -> output")
@@ -99,7 +99,7 @@ def test_dspy_lm_direct_usage():
     
     try:
         # Import the API key
-        from ..config.settings import GOOGLE_API_KEY
+        from src.config.settings import GOOGLE_API_KEY
         
         # Create dspy.LM directly with our settings
         lm = dspy.LM(

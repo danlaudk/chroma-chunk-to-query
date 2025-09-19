@@ -3,11 +3,11 @@ End-to-end test that exercises all services in the project.
 This test demonstrates the complete pipeline from entity input to classification.
 """
 import dspy
-from ..services.entity_processor import EntityProcessor
-from ..services.wikipedia_service import WikipediaService
-from ..services.chroma_service import ChromaService
-from ..models.entity_classifier import ClassifyEntityModule
-from ..models.llm_model import initialize_litellm_dspy
+from src.services.entity_processor import EntityProcessor
+from src.services.wikipedia_service import WikipediaService
+from src.services.chroma_service import ChromaService
+from src.models.entity_classifier import ClassifyEntityModule
+from src.models.llm_model import initialize_dspy
 
 def test_end_to_end_pipeline():
     """Test the complete end-to-end pipeline with all services."""
@@ -147,7 +147,7 @@ def test_end_to_end_pipeline():
         print("✓ Wikipedia Service - Article retrieval and chunking")
         print("✓ Chroma Service - Vector storage and retrieval")
         print("✓ Entity Classifier - DSPy-based classification")
-        print("✓ LLM Model - DSPy LM with LiteLLM integration")
+        print("✓ LLM Model - DSPy LM")
         print("✓ Entity Processor - Orchestration of all services")
         
     except Exception as e:

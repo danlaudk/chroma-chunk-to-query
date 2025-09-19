@@ -2,9 +2,11 @@
 Comprehensive test for ChromaService functionality.
 Tests chunk indexing, querying, and metadata filtering.
 """
+import sys
+print("In module  sys.path[0], __package__ ==", sys.path[0], __package__)
 import chromadb
-from ..services.chroma_service import ChromaService
-from ..config.settings import CHROMA_PERSISTENCE_DIR
+from src.services.chroma_service import ChromaService
+from src.config.settings import CHROMA_PERSISTENCE_DIR
 
 def test_chroma_service_basic_functionality():
     """Test basic ChromaService functionality with proper metadata."""
@@ -113,6 +115,9 @@ def test_chroma_service_basic_functionality():
         print(f"\n❌ Basic ChromaService test failed: {e}")
         raise
 
+    finally:
+        chroma_service = None
+
 def test_chroma_service_advanced_queries():
     """Test advanced ChromaService querying capabilities."""
     print("\n" + "=" * 60)
@@ -199,6 +204,8 @@ def test_chroma_service_advanced_queries():
     except Exception as e:
         print(f"\n❌ Advanced ChromaService test failed: {e}")
         raise
+    finally:
+        chroma_service = None
 
 def test_chroma_service_edge_cases():
     """Test ChromaService edge cases and error handling."""
@@ -278,7 +285,8 @@ def test_chroma_service_edge_cases():
     except Exception as e:
         print(f"\n❌ Edge cases test failed: {e}")
         raise
-
+    finally:
+        del chroma_service
 def test_chroma_service_performance():
     """Test ChromaService performance with larger datasets."""
     print("\n" + "=" * 60)
@@ -325,6 +333,8 @@ def test_chroma_service_performance():
     except Exception as e:
         print(f"\n❌ Performance test failed: {e}")
         raise
+    finally:
+        del chroma_service
 
 if __name__ == "__main__":
     test_chroma_service_basic_functionality()

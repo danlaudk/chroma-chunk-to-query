@@ -1,0 +1,2 @@
+from .daily_activity_service import DailyActivityExtractorService
+

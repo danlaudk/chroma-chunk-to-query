@@ -1,16 +1,16 @@
 """
-Test script to verify DSPy and LiteLLM integration.
+Test script to verify DSPy and LLM integration.
 """
 import dspy
-from ..models.llm_model import initialize_litellm_dspy
+from src.models.llm_model import initialize_dspy
 
 def test_llm_setup():
     print("Testing LLM Integration...")
     
     try:
         # Initialize the LLM
-        llm = initialize_litellm_dspy()
-        print("✓ LiteLLM initialization successful")
+        llm = initialize_dspy()
+        print("✓ LLM initialization successful")
         
         # Test basic completion
         prompt = "What is the capital of France?"

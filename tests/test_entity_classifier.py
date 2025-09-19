@@ -2,13 +2,13 @@
 Test script to verify the Entity Classifier functionality with Pydantic validation.
 """
 import dspy
-from ..models.entity_classifier import (
+from src.models.entity_classifier import (
     ClassifyEntityModule, 
     EntityType, 
     EntityClassificationResponse,
     EntityClassificationSignature
 )
-from ..models.llm_model import initialize_litellm_dspy
+from src.models.llm_model import initialize_dspy
 from pydantic import ValidationError
 
 
@@ -74,9 +74,9 @@ def test_entity_classifier():
     print("\nTesting Entity Classifier with validation...")
     
     try:
-        # Initialize DSPy with our LiteLLM model
-        llm = initialize_litellm_dspy()
-        print("✓ DSPy and LiteLLM initialized")
+        # Initialize DSPy
+        llm = initialize_dspy()
+        print("✓ DSPy initialized")
         
         # Create the entity classifier
         classifier = ClassifyEntityModule()
@@ -131,8 +131,7 @@ def test_entity_classifier_with_different_terms():
     print("\nTesting Entity Classifier with different entity types...")
     
     try:
-        # Initialize DSPy with our LiteLLM model
-        llm = initialize_litellm_dspy()
+        llm = initialize_dspy()
         
         # Create the entity classifier
         classifier = ClassifyEntityModule()

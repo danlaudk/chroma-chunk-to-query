@@ -185,6 +185,7 @@ class ClassifyEntityModule(dspy.Module):
         """
         try:
             # Get prediction from DSPy
+            # assumes DSPy is initialized with llm
             prediction = self.prog(
                 term=term,
                 linked_wikipedia_title=linked_wikipedia_title,
@@ -201,4 +202,4 @@ class ClassifyEntityModule(dspy.Module):
             
         except Exception as e:
             # Fallback in case of any errors
-            return "UNKNOWN", f"Classification failed: {str(e)}" 
+            return "UNKNOWN", f"Classification Entity-Forward failed: {str(e)}" 

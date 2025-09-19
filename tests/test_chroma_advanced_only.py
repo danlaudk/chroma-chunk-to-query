@@ -2,8 +2,8 @@
 Standalone test for ChromaService advanced queries only.
 """
 import chromadb
-from ..services.chroma_service import ChromaService
-from ..config.settings import CHROMA_PERSISTENCE_DIR
+from src.services.chroma_service import ChromaService
+from src.config.settings import CHROMA_PERSISTENCE_DIR
 
 def test_chroma_service_advanced_queries():
     """Test advanced ChromaService querying capabilities."""

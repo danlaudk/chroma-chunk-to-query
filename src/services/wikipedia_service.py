@@ -23,8 +23,12 @@ class WikipediaService:
                 "exintro": False,  # Get full extract, not just intro
                 "redirects": 1  # Follow redirects
             }
-            
-            response = requests.get(WIKIPEDIA_API_URL, params=params)
+            headers = {
+                    "User-Agent": "WikipediaService/1.0",
+                    "Accept": "application/json"
+                }
+            response = requests.get(WIKIPEDIA_API_URL, params=params, headers=headers)
+            print(f"Data: {response.status_code}")
             data = response.json()
             page = next(iter(data['query']['pages'].values()))
             

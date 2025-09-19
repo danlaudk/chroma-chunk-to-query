@@ -1,5 +1,5 @@
 """
-DSPy LM configuration using LiteLLM for multi-provider support.
+DSPy LM configuration with multi-provider support. 
 """
 import dspy
 from ..config.settings import (
@@ -8,12 +8,10 @@ from ..config.settings import (
     LLM_TEMPERATURE
 )
 
-def initialize_litellm_dspy():
+def initialize_dspy():
     """
-    Initialize DSPy with a LiteLLM-compatible LM.
     Uses DSPy's built-in LM class which has LiteLLM integration.
     """
-    # Create a DSPy LM instance that uses LiteLLM under the hood
     lm = dspy.LM(
         model=LLM_MODEL,
         api_key=GOOGLE_API_KEY,
@@ -22,7 +20,6 @@ def initialize_litellm_dspy():
         cache=True
     )
     
-    # Configure DSPy with the LM
     dspy.configure(lm=lm)
     
     # Test the connection
