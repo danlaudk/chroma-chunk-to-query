@@ -8,12 +8,14 @@ def test_llm_setup():
     print("Testing LLM Integration...")
     
     try:
-        # Initialize the LLM
-        llm = initialize_dspy()
+        # Initialize the LLM using default config (mapped via JSON)
+        llm = initialize_dspy(model_name=None)
+        # llm = initialize_dspy(model_name="summllama3")
+
         print("✓ LLM initialization successful")
         
         # Test basic completion
-        prompt = "What is the capital of France?"
+        prompt = "What is the capital of GERMANY?"
         print(f"\nTesting completion with prompt: '{prompt}'")
         
         response = llm(prompt)
