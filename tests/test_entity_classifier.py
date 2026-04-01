@@ -75,7 +75,7 @@ def test_entity_classifier():
     
     try:
         # Initialize DSPy
-        llm = initialize_dspy()
+        llm = initialize_dspy("z-ai")
         print("✓ DSPy initialized")
         
         # Create the entity classifier
@@ -131,7 +131,7 @@ def test_entity_classifier_with_different_terms():
     print("\nTesting Entity Classifier with different entity types...")
     
     try:
-        llm = initialize_dspy()
+        llm = initialize_dspy("")
         
         # Create the entity classifier
         classifier = ClassifyEntityModule()

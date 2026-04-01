@@ -9,30 +9,32 @@ import dspy
 from pydantic import BaseModel
 
 
-class DailyActivitiesSignature(dspy.Signature):
+class SyntheticQusSignature(dspy.Signature):
     """Extract concise daily activities from a transcript.
 
     transcript_text: The full transcript content to analyze.
-    activities: A concise, comma-separated list of daily activities only. No prose.
+    questions: diverse synthetic questions followed only by the actual moderator's question.
     """
 
     transcript_text = dspy.InputField()
-    activities = dspy.OutputField(desc=(
-        "Comma-separated activities only (e.g., 'make coffee, go to work')."
-        " No explanations, no bullets, no extra text."
+    questions = dspy.OutputField(desc=(
+        "Questions in German then moderator's question, verbatim"
+        "Per moderator and interviewee chunk, Five Synthetic questions in German motivating the chunk, followed only by the actual moderator's question."
+        " Make the questions in the moment and as if they were a part of a potential dialogue, but in lay language. Each set of five quetsions should be inspired from diverse situations in regular life"
     ))
 
 
-class DailyActivityExtractorService(BaseModel):
+class SyntheticQusService(BaseModel):
     """Wraps DSPy's Predict to extract activities and write them to disk."""
 
     def _predict(self) -> dspy.Predict:
         # Uses globally configured LM (configured elsewhere via initialize_dspy)
-        return dspy.Predict(DailyActivitiesSignature)
+        return dspy.Predict(SyntheticQusSignature)
 
     def extract_and_save(self, transcript_path: str) -> str:
-        """Extract activities from the given transcript and save alongside it.
-        
+        # """Extract activities from the given transcript and save alongside it.
+        """create synthetic questions from the transcript , and save alongside it.
+
         Returns the exact string written to the file.
         """
         transcript_file = Path(transcript_path)
@@ -43,7 +45,7 @@ class DailyActivityExtractorService(BaseModel):
 
         predictor = self._predict()
         result = predictor(transcript_text=transcript_text)
-        activities: str = (result.activities or "").strip()
+        activities: str = (result.questions or "").strip()
 
         # Derive output path: <name>.activities.txt next to transcript
         out_path = transcript_file.with_suffix(transcript_file.suffix + ".activities.txt")

@@ -9,7 +9,7 @@ def test_llm_setup():
     
     try:
         # Initialize the LLM using default config (mapped via JSON)
-        llm = initialize_dspy(model_name=None)
+        llm = initialize_dspy(model_name="z-ai")
         # llm = initialize_dspy(model_name="summllama3")
 
         print("✓ LLM initialization successful")

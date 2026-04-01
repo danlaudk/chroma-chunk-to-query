@@ -3,7 +3,6 @@ Test script to verify DSPy integration points for dspy.LM with LiteLLM??.
 """
 import dspy
 from src.models.llm_model import initialize_dspy
-from src.config.settings import LLM_MODEL, LLM_TEMPERATURE
 
 def test_dspy_configure_integration():
     """Test that our dspy.LM can be configured with DSPy."""
@@ -98,20 +97,8 @@ def test_dspy_lm_direct_usage():
     print("\nTesting direct dspy.LM usage...")
     
     try:
-        # Import the API key
-        from src.config.settings import GOOGLE_API_KEY
-        
-        # Create dspy.LM directly with our settings
-        lm = dspy.LM(
-            model=LLM_MODEL,
-            api_key=GOOGLE_API_KEY,
-            temperature=LLM_TEMPERATURE,
-            max_tokens=4000,
-            cache=True
-        )
-        
-        # Configure DSPy
-        dspy.configure(lm=lm)
+        # Use initialize_dspy to get a configured LM from model_configs.json
+        lm = initialize_dspy()
         
         # Test basic functionality
         response = lm("Hello, this is a test.")

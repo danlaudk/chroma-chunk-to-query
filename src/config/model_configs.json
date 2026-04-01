@@ -1,0 +1,39 @@
+{
+  "default": {
+    "model_name": "gemini/gemini-2.0-flash",
+    "provider": "${LITELLM_PROVIDER:-}",
+    "api_base": "${LITELLM_API_BASE:-}",
+    "api_key_env": "GOOGLE_API_KEY",
+    "temperature": "${LLM_TEMPERATURE:-0.2}",
+    "max_tokens": 4000,
+    "cache": true
+  },
+  "summllama3": {
+    "model_name": "openai/summllama3",
+    "provider": "openai",
+    "api_base": "http://127.0.0.1:8080",
+    "api_key_env": "DUMMY_API_KEY_IN_DOTENV",
+    "temperature": 0.1,
+    "max_tokens": 4000,
+    "cache": true
+  },
+
+  "z-ai": {
+    "model_name": "openrouter/z-ai/glm-4.5-air:free",
+    "provider": "Z.AI",
+    "api_base": "https://openrouter.ai/api/v1",
+    "api_key_env": "OPENROUTER_API_KEY",
+    "temperature": 0.1,
+    "max_tokens": 20000,
+    "cache": true
+  },
+  "openroute-gemini": {
+    "model_name": "openrouter/gemini/gemini-2.0-flash-exp",
+    "provider": "openrouter",
+    "api_base": "https://openrouter.ai/api/v1",
+    "api_key_env": "OPENROUTER_API_KEY",
+    "temperature": 0.1,
+    "max_tokens": 20000,
+    "cache": true
+  }
+}
